@@ -11,4 +11,9 @@ public class City {
     public int getDistance() {
         return distance;
     }
+
+    public int setDistance(int distance) {
+        this.distance = distance;
+        return distance;
+    }
 }

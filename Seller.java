@@ -2,15 +2,17 @@ package lab28;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Random;
 
-public class Seller {
-    Random random = new Random();
-    private int money = random.nextInt(50)+50;            // Начальное количество денег от 50 до 100 монет
+public class Seller{
+//    Random random = new Random();
+    private int money = 100;         // Начальное количество денег от 50 до 100 монет
     private  int maxWeight = 200;                               // максимальный вес 200кг
     private int currentWeight = 0;
-    private  int movementSpeed = (int) (Math.random()*(5-1)+1); // скорость передвижение от 1 до 5
-    private List<Products> boughtProducts = new ArrayList<>();
+    private  int movementSpeed = 3;  // скорость передвижения
+    private int untilCityDistance = 0;
+    private List<Products> boughtProducts = new ArrayList<>();  // товары в телеге
+    private City city = new City();
+//    private Event event = new Event();
 
     // массив товаров, из которых мы будем покуть случайные товары перед въездом:
     Products[] products = {
@@ -27,17 +29,7 @@ public class Seller {
         return products[random];
     }
 
-//    // метод, который закупет продукт и дабавляет в телегу:
-//    public List<Products> buyProduct(){
-//        boughtProducts.add(getRandomProduct());
-//      System.out.printf("Купил %s за %s, [состояние: %s], \n ",boughtProducts.get(0).getTypeOfProduct(),
-//              boughtProducts.get(0).getPrice() , boughtProducts.get(0).getQuality() );
-//      maxWeight  -= getRandomProduct().getWeight();
-//      money -= getRandomProduct().getPrice();
-//      boughtProducts.add(getRandomProduct());
-//      return boughtProducts;
-//    }
-
+    // выбранные товары будут дабавлены в List
     public  void buyingProducts(){
         while (money > getRandomProduct().getPrice() || currentWeight < maxWeight){
             boughtProducts.add(getRandomProduct());
@@ -46,11 +38,8 @@ public class Seller {
         }
         System.out.println("Купил товары: ");
         boughtProducts.forEach(System.out::println);
-    }
-
-    public static void main(String[] args) {
-        Seller seller = new Seller();
-        seller.buyingProducts();
+        System.out.printf("Осталось %s монет \n", money);
+        System.out.println("___________________________________________________________________");
     }
 
     public int getMoney() {
@@ -82,8 +71,9 @@ public class Seller {
         return movementSpeed;
     }
 
-    public void setMovementSpeed(int movementSpeed) {
+    public int setMovementSpeed(int movementSpeed) {
         this.movementSpeed = movementSpeed;
+        return movementSpeed;
     }
 
     public int getCurrentWeight() {
@@ -101,4 +91,5 @@ public class Seller {
     public void setBoughtProducts(List<Products> boughtProducts) {
         this.boughtProducts = boughtProducts;
     }
+
 }

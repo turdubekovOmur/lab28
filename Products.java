@@ -16,12 +16,6 @@ public class Products {
         return products;
     }
 
-    // Выбрать случайный продукт:
-    public TypeOfProduct getRandomProduct() {
-        int random = (int) (Math.random() * TypeOfProduct.values().length);
-        return TypeOfProduct.values()[random];
-    }
-
     public double getWeight() {
         return weight;
     }
